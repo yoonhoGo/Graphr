@@ -14,6 +14,10 @@ function widthPlusPadding(elem) {
 function JSgCalc (element){
 	this.graph = document.getElementById(element);
 	this.graphElement = $("#"+element);
+	if (!this.graph || !this.graphElement) {
+		console.log(`TCL: JSgCalc -> this.graph, this.graphElement`, this.graph, this.graphElement)
+		return
+	}
 	this.width = $("#wrapper").width();
 	this.height = $("#wrapper").height();
 	this.maxgridlines = {x : 13, y : 13};
