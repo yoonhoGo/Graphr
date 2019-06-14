@@ -1,3 +1,5 @@
+const { widthPlusPadding } = require('./jsgcalc')
+
 function JSgui() {
 	this.currInput = 0;
 	this.lineColors = {"#FF0000" : -1, "#0000FF" : -1, "#00FF00" : -1, "#FF00FF" : -1, "#00FFFF" : -1,
@@ -157,3 +159,8 @@ $(document).ready(function() {
 	
 	document.body.onselectstart = function () { return false; }
 });
+
+module.exports = {
+	JSgui,
+	jsgui,
+}

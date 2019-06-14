@@ -1,4 +1,16 @@
 import React from 'react'
+import DerivativeImage from '../../images/derivative.png'
+import IntersectImage from '../../images/intersect.png'
+import MinmaxImage from '../../images/minmax.png'
+import PointerImage from '../../images/pointer.png'
+import RootImage from '../../images/root.png'
+import TraceImage from '../../images/trace.png'
+import ZoomboxImage from '../../images/zoombox.png'
+import ZoominImage from '../../images/zoomin.png'
+import ZoomoutImage from '../../images/zoomout.png'
+
+declare const jsgui: any
+
 export default () => {
   return (
     <div id='toolbar'>
@@ -9,7 +21,7 @@ export default () => {
           id='tool_select_pointer'
           className='toolbar_option toolbar_selected'
         >
-          <img src='images/pointer.png' alt='Pointer' title='Pointer' />
+          <img src={PointerImage} alt='Pointer' title='Pointer' />
         </a>
         <a
           href='javascript:void(0)'
@@ -17,7 +29,7 @@ export default () => {
           id='tool_select_trace'
           className='toolbar_option'
         >
-          <img src='images/trace.png' alt='Trace' title='Trace' />
+          <img src={TraceImage} alt='Trace' title='Trace' />
         </a>
         <a
           href='javascript:void(0)'
@@ -26,7 +38,7 @@ export default () => {
           className='toolbar_option'
         >
           <img
-            src='images/minmax.png'
+            src={MinmaxImage}
             alt='Local Minima/Maxima'
             title='Local Minima/Maxima'
           />
@@ -37,7 +49,7 @@ export default () => {
           id='tool_select_root'
           className='toolbar_option'
         >
-          <img src='images/root.png' alt='Root' title='Root' />
+          <img src={RootImage} alt='Root' title='Root' />
         </a>
         <a
           href='javascript:void(0)'
@@ -45,7 +57,7 @@ export default () => {
           id='tool_select_intersect'
           className='toolbar_option'
         >
-          <img src='images/intersect.png' alt='Intersect' title='Intersect' />
+          <img src={IntersectImage} alt='Intersect' title='Intersect' />
         </a>
         <a
           href='javascript:void(0)'
@@ -53,11 +65,7 @@ export default () => {
           id='tool_select_derivative'
           className='toolbar_option'
         >
-          <img
-            src='images/derivative.png'
-            alt='Derivative'
-            title='Derivative'
-          />
+          <img src={DerivativeImage} alt='Derivative' title='Derivative' />
         </a>
         <a
           href='javascript:void(0)'
@@ -65,7 +73,7 @@ export default () => {
           id='tool_select_zoombox'
           className='toolbar_option'
         >
-          <img src='images/zoombox.png' alt='ZoomBox' title='ZoomBox' />
+          <img src={ZoomboxImage} alt='ZoomBox' title='ZoomBox' />
         </a>
         <a
           href='javascript:void(0)'
@@ -73,7 +81,7 @@ export default () => {
           id='tool_select_zoomin'
           className='toolbar_option'
         >
-          <img src='images/zoomin.png' alt='Zoom In' title='Zoom In' />
+          <img src={ZoominImage} alt='Zoom In' title='Zoom In' />
         </a>
         <a
           href='javascript:void(0)'
@@ -81,7 +89,7 @@ export default () => {
           id='tool_select_zoomout'
           className='toolbar_option'
         >
-          <img src='images/zoomout.png' alt='Zoom Out' title='Zoom Out' />
+          <img src={ZoomoutImage} alt='Zoom Out' title='Zoom Out' />
         </a>
       </div>
     </div>

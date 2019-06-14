@@ -1,4 +1,6 @@
 import React from 'react'
+import SettingsImage from '../../images/settings.png'
+
 export default () => {
   return (
     <div id='sidewrapper'>
@@ -49,7 +51,7 @@ export default () => {
             id='settings_button'
             onClick={() => $('#settings').toggle(400)}
           >
-            <img src='images/settings.png' alt='Settings' />
+            <img src={SettingsImage} alt='Settings' />
           </a>
           <br />
           <br />
