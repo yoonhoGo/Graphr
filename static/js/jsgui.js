@@ -61,7 +61,7 @@ function JSgui() {
 		jsgcalc.draw();
 	}
 
-	this.hideSidebar = () => {
+	this.hideSidebar = function() {
 		$("#sidewrapper").hide();
 		$("#hideSidebar").hide();
 		$("#showSidebar").show();
@@ -71,7 +71,7 @@ function JSgui() {
 		this.setTool(this.currtool);
 	}
 
-	this.showSidebar = () => {
+	this.showSidebar = function() {
 		$("#sidewrapper").show();
 		$("#hideSidebar").show();
 		$("#showSidebar").hide();
