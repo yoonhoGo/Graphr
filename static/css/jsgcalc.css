@@ -1,6 +1,6 @@
-@import url(http://fonts.googleapis.com/css?family=Lora:400,400italic);
-@import url(http://fonts.googleapis.com/css?family=Monda);
-@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Lora:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Monda);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic);
 body { font-family: "Open Sans", sans-serif; font-size: 9pt;}
 
 #wrapper { position: absolute; top: 0px; left: 0px; height: 100%; width: 100%;overflow: hidden;}
