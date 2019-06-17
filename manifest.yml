@@ -1,0 +1,7 @@
+name: '@enoch/graphr'
+version: '1.0.0'
+type: session
+icon: [fas, calendar-day]
+displayName:
+  en-US: Graphr
+  ko-KR: Graphr
