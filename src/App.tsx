@@ -30,9 +30,4 @@ export default class App extends React.Component {
       </div>
     )
   }
-
-  componentDidMount() {
-    window.jsgcalc = new JSgCalc('graph')
-    window.jsgcalc.initCanvas()
-  }
 }

@@ -1,4 +1,4 @@
-const { widthPlusPadding } = require('./jsgcalc')
+const { widthPlusPadding, JSgCalc } = require('./jsgcalc')
 const { CoreWrapper } = require('./core')
 
 function JSgui() {
@@ -24,31 +24,31 @@ function JSgui() {
   this.gridlines = 'normal'
   this.settings = {}
 
-  this.setQuality = this.core.wrapper('--grapher-setQuality', (q) => {
+  this.setQuality = this.core.wrapper('--graphr-setQuality', q => {
     $('#quality_select a').removeClass('option_selected')
     q2 = String(q).replace('.', '')
     $('#quality_select_' + q2).addClass('option_selected')
 
-    jsgcalc.quality = q
-    jsgcalc.draw()
+    window.jsgcalc.quality = q
+    window.jsgcalc.draw()
   })
 
-  this.setAngles = this.core.wrapper('--grapher-setAngles', (q) => {
+  this.setAngles = this.core.wrapper('--graphr-setAngles', q => {
     $('#angle_select a').removeClass('option_selected')
     $('#angle_select_' + q).addClass('option_selected')
 
     Calc.angles = q
-    jsgcalc.draw()
+    window.jsgcalc.draw()
   })
 
-  this.selectEquation = this.core.wrapper('--grapher-selectEquation', (x) => {
+  this.selectEquation = this.core.wrapper('--graphr-selectEquation', x => {
     this.currEq = x
     $('#graph_inputs div.graph_input_wrapper').removeClass('active_equation')
     $('#graph_input_wrapper_' + x).addClass('active_equation')
-    jsgcalc.draw()
+    window.jsgcalc.draw()
   })
 
-  this.setTool = this.core.wrapper('--grapher-setTool', (t) => {
+  this.setTool = this.core.wrapper('--graphr-setTool', t => {
     $('#tool_select a').removeClass('toolbar_selected')
     $('#tool_select_' + t).addClass('toolbar_selected')
 
@@ -62,28 +62,28 @@ function JSgui() {
     )
 
     this.currtool = t
-    jsgcalc.draw()
+    window.jsgcalc.draw()
   })
 
-  this.doTrace = this.core.wrapper('--grapher-doTrace', (xval) => {
-    jsgcalc.draw()
-    jsgcalc.drawTrace(jsgcalc.getEquation(this.currEq), '#000000', xval)
+  this.doTrace = this.core.wrapper('--graphr-doTrace', xval => {
+    window.jsgcalc.draw()
+    window.jsgcalc.drawTrace(window.jsgcalc.getEquation(this.currEq), '#000000', xval)
   })
 
-  this.setGridlines = this.core.wrapper('--grapher-setGridlines', (t) => {
+  this.setGridlines = this.core.wrapper('--graphr-setGridlines', t => {
     $('#gridlines_select a').removeClass('option_selected')
     $('#gridlines_select_' + t).addClass('option_selected')
 
     this.gridlines = t
-    jsgcalc.draw()
+    window.jsgcalc.draw()
   })
 
-  this.hideSidebar = this.core.wrapper('--grapher-hideSidebar', () => {
+  this.hideSidebar = this.core.wrapper('--graphr-hideSidebar', () => {
     $('#sidewrapper').hide()
     $('#hideSidebar').hide()
     $('#showSidebar').show()
     $('#toolbar').css('right', '0px')
-    jsgcalc.resizeGraph(
+    window.jsgcalc.resizeGraph(
       $('#wrapper').width() - widthPlusPadding('#toolbar'),
       $('#wrapper').height()
     )
@@ -91,12 +91,12 @@ function JSgui() {
     this.setTool(this.currtool)
   })
 
-  this.showSidebar = this.core.wrapper('--grapher-showSidebar', () => {
+  this.showSidebar = this.core.wrapper('--graphr-showSidebar', () => {
     $('#sidewrapper').show()
     $('#hideSidebar').show()
     $('#showSidebar').hide()
     $('#toolbar').css('right', '252px')
-    jsgcalc.resizeGraph(
+    window.jsgcalc.resizeGraph(
       $('#wrapper').width() -
         $('#sidewrapper').width() -
         widthPlusPadding('#toolbar'),
@@ -106,50 +106,53 @@ function JSgui() {
     this.setTool(this.currtool)
   })
 
-  this.updateInputData = this.core.wrapper('--grapher-updateInputData', () => {
-    jsgcalc.lines = []
-    $('#graph_inputs div.graph_input_wrapper').each(() => {
-      jsgcalc.lines.push({
+  this.updateInputData = () => {
+    window.jsgcalc.lines = []
+    $('#graph_inputs div.graph_input_wrapper').each(function() {
+      window.jsgcalc.lines.push({
         equation: $('input', this).val(),
         color: $('.graph_color_indicator', this).css('backgroundColor')
       })
     })
-  })
+  }
 
-  this.evaluate = this.core.wrapper('--grapher-evaluate', () => {
+  this.evaluate = this.core.wrapper('--graphr-evaluate', () => {
     this.updateInputData()
-    jsgcalc.draw()
-    this.refreshInputs()
+    window.jsgcalc.draw()
+    this.refreshInputs(window.jsgcalc.lines)
+    // this.core.core.publish('--graphr-equations', window.jsgcalc.lines)
   })
 
-  this.findAvailableColor = this.core.wrapper('--grapher-findAvailableColor', () => {
+  this.findAvailableColor = () => {
     for (var color in this.lineColors) {
       if (this.lineColors[color] == -1) return color
     }
-  })
+  }
 
   //Update gui values
-  this.updateValues = this.core.wrapper('--grapher-updateValues', () => {
-    $('input.jsgcalc_xmin').val(Math.round(jsgcalc.currCoord.x1 * 1000) / 1000)
-    $('input.jsgcalc_xmax').val(Math.round(jsgcalc.currCoord.x2 * 1000) / 1000)
-    $('input.jsgcalc_ymin').val(Math.round(jsgcalc.currCoord.y1 * 1000) / 1000)
-    $('input.jsgcalc_ymax').val(Math.round(jsgcalc.currCoord.y2 * 1000) / 1000)
+  this.updateValues = this.core.wrapper('--graphr-updateValues', () => {
+    $('input.jsgcalc_xmin').val(Math.round(window.jsgcalc.currCoord.x1 * 1000) / 1000)
+    $('input.jsgcalc_xmax').val(Math.round(window.jsgcalc.currCoord.x2 * 1000) / 1000)
+    $('input.jsgcalc_ymin').val(Math.round(window.jsgcalc.currCoord.y1 * 1000) / 1000)
+    $('input.jsgcalc_ymax').val(Math.round(window.jsgcalc.currCoord.y2 * 1000) / 1000)
   })
 
-  this.addInput = this.core.wrapper('--grapher-addInput', () => {
+  this.addInput = this.core.wrapper('--graphr-addInput', () => {
     this.updateInputData()
     var newcolor = this.findAvailableColor()
     this.lineColors[newcolor] = this.currInput
-    jsgcalc.lines.push({
+    window.jsgcalc.lines.push({
       equation: '',
       color: newcolor
     })
     this.currInput++
-    this.refreshInputs()
+    this.refreshInputs(window.jsgcalc.lines)
+    // this.core.core.publish('--graphr-equations', window.jsgcalc.lines)
   })
 
-  this.refreshInputs = this.core.wrapper('--grapher-refreshInputs', () => {
-    var equations = jsgcalc.lines
+  this.refreshInputs = this.core.wrapper('--graphr-refreshInputs', (equations) => {
+    console.log(`TCL: JSgui -> equations`, equations)
+    // var equations = window.jsgcalc.lines
 
     $('#graph_inputs').html('')
     for (i in equations) {
@@ -190,14 +193,20 @@ function JSgui() {
 jsgui = new JSgui()
 
 $(document).ready(function() {
-  jsgui.addInput()
-  $('.toolbox_close a').click(function() {
-    $('.toolbox').hide()
-  })
+  jsgui.core.core.on('initialized', () => {
+    console.log('Everybody Hi!')
+    jsgui.addInput()
+    $('.toolbox_close a').click(function() {
+      $('.toolbox').hide()
+    })
 
-  document.body.onselectstart = function() {
-    return false
-  }
+    document.body.onselectstart = function() {
+      return false
+    }
+
+    window.jsgcalc = new JSgCalc('graph')
+    window.jsgcalc.initCanvas()
+  })
 })
 
 module.exports = {

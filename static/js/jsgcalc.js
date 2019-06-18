@@ -899,11 +899,6 @@ function JSgCalc(element) {
   }
 }
 
-$(document).ready(function() {
-  // jsgcalc = new JSgCalc('graph')
-  // jsgcalc.initCanvas()
-})
-
 function about() {
   alert(
     'For demonstration purposes only.\n\nCalculations are not guaranteed to be correct and are often inaccurate due to floating point errors. Use at your own risk.'
