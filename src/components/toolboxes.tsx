@@ -1,4 +1,5 @@
 import React from 'react'
+import GraphImage from '../../images/graph.png'
 
 export default () => {
   return (
@@ -41,7 +42,7 @@ export default () => {
                   />
                 </td>
                 <td align='center'>
-                  <img src='graph.png' style={{ width: '70px' }} />
+                  <img src={GraphImage} style={{ width: '70px' }} />
                 </td>
                 <td>
                   x-max:
