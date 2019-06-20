@@ -1,9 +1,30 @@
 import { Core } from '@classroom/sdk'
 
 export class CoreWrapper {
-  constructor() {
+  constructor(serviceName) {
+    this.serviceName =
+      serviceName || `noname${Math.ceil(Math.random() * 1000000)}`
     this.core = new Core()
-    this.subscribers = {}
+    this.store = {}
+  }
+
+  observer(name) {
+    const eventName = `--graphr-store-${this.serviceName}-${name}`
+    this.store[name] = {
+      _eventName: eventName,
+      _value: undefined,
+      get value() {
+        return this._value
+      },
+      set value(__value) {
+        this._value = __value
+        this.core.publish(eventName, this._value)
+      }
+    }
+    this.core.subscribe(eventName, __value => {
+      this.store[name]._value = __value
+    })
+    return this.store[name]
   }
 
   wrapper(eventName, eventListener) {
@@ -25,3 +46,7 @@ export class CoreWrapper {
     }
   }
 }
+
+const a = core.observer()
+a.get()
+a.set()
